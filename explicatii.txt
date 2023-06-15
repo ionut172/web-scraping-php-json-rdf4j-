@@ -1,0 +1,15 @@
+Codul furnizat este un script PHP care efectuează operații de web scraping pentru a extrage date despre cărți de pe site-ul libris.ro. Haideți să trecem prin codul sursă și să explicăm fiecare secțiune:
+
+În secțiunea de început, se configurează setările de afișare a erorilor pentru a asigura că toate erorile sunt raportate.
+Variabila $surse este un array care conține sursele de date pe care dorim să le extragem. În exemplul dat, există o singură sursă, libris, care reprezintă URL-ul către pagina de cărți IT și Computere de pe site-ul libris.ro.
+Variabila $antetCsv este un array care definește antetul coloanelor pentru fișierul CSV în care vor fi stocate datele extrase.
+Se creează un folder cu numele "data" și cu timestamp-ul curent în numele folderului, pentru a stoca fișierele CSV cu datele extrase.
+Se afișează mesajul "Data scraping începută la - " urmat de timestamp-ul curent.
+Variabila $dataToSend este un array în care vor fi stocate datele extrase pentru a fi trimise ulterior către un server.
+Se parcurg sursele de date și se inițializează variabilele necesare pentru extragerea datelor din fiecare sursă.
+Într-un bloc while, se parcurg paginile următoare pentru a extrage datele. În cazul sursei libris, se folosește funcția file_get_contents pentru a obține conținutul paginii. Apoi, se utilizează expresii regulate pentru a extrage informațiile necesare, cum ar fi URL-urile imaginilor, titlurile și prețurile.
+Datele extrase sunt stocate într-un fișier CSV și adăugate în array-ul $dataToSend.
+După extragerea datelor, se verifică dacă există un formular trimis prin metoda POST cu butonul "submit_delete". În caz afirmativ, se trimite un request POST către un server API pentru a șterge datele extrase.
+De asemenea, se verifică dacă există un formular trimis prin metoda POST cu butonul "submit_rdf4j". În caz afirmativ, se trimite un request POST către un server RDF4J pentru a insera datele extrase.
+În continuare, se afișează două formulare cu butoane. Primul formular are butoanele "Send Data to API Server" și "Send Data to RDF4J Server", iar al doilea formular are butonul "Delete Data". Aceste butoane permit utilizatorului să trimită datele extrase către servere specifice sau să șteargă datele.
+În rezumat, acest script PHP extrage date despre cărți IT și Computere de pe site-ul libris.ro, le stochează într-un fișier CSV și oferă opțiuni pentru a trimite datele extrase către un server API, un server RDF4J sau pentru a le șterge.
